@@ -1,8 +1,13 @@
 package com.mongo.service;
 
 import com.mongo.entity.Account;
-import com.mongo.entity.Customer;
 import com.mongo.entity.Address;
+import com.mongo.entity.Customer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,14 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test class for integration tests on Customer Service.
@@ -59,6 +59,12 @@ public class CustomerServiceIT {
     }
 
     @Test
+    public void shouldFailToTestJenkinsBuildFail() {
+        //given when then
+        fail("Fail to test Jenkins job fail");
+    }
+
+    @Test
     public void shouldCreateNewCustomer() {
         // when
         service.create(customer);
@@ -94,7 +100,7 @@ public class CustomerServiceIT {
         List<Customer> customers = service.findAll();
 
         // then
-        assertEquals(2, customers.size());
+        assertEquals(3, customers.size());
     }
 
     @Test
